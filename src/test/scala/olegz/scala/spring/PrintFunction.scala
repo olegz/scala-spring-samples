@@ -15,27 +15,10 @@
  */
 package olegz.scala.spring
 
-import org.springframework.beans.factory.FactoryBean
 /**
  * @author Oleg Zhurakousky
  *
  */
-class ScalaFactoryBean extends FactoryBean[PrintFunction] {
-  
-  val myFunction = new PrintFunction()
-
-  def getObject(): PrintFunction = {  
-    println("Creating 'PrintFunction'")
-	return myFunction
-  }
-
-  def getObjectType(): Class[PrintFunction] = { 
-    classOf[PrintFunction]
-  }
-
-  def isSingleton(): Boolean = { 
-    true 
-  }
+class PrintFunction extends Function1[String, Unit]{
+   def apply(in: String) = println("From Scala function: " + in)
 }
-
-  

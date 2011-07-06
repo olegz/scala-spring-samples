@@ -29,9 +29,11 @@ public class SpringDemo {
 	 */
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("scala-config.xml", SpringDemo.class);
-		SimpleSpringBean bean = context.getBean(SimpleSpringBean.class);
-		bean.printMessage("Hello Spring-Scala");
-
+		SimpleSpringBean functionDirect = context.getBean("functionDirect", SimpleSpringBean.class);
+		functionDirect.printMessage("Hello Spring-Scala");
+		
+		SimpleSpringBean functionViaFactoryBean = context.getBean("functionViaFactoryBean", SimpleSpringBean.class);
+		functionViaFactoryBean.printMessage("Hello Spring-Scala");
 	}
 
 }

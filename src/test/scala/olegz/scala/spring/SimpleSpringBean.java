@@ -23,10 +23,6 @@ public class SimpleSpringBean {
 
 	private PrintFunction function;
 
-	public PrintFunction getFunction() {
-		return function;
-	}
-
 	public void setFunction(PrintFunction function) {
 		this.function = function;
 	}

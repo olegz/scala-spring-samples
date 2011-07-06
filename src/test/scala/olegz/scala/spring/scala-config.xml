@@ -6,8 +6,15 @@
 		
 	<bean id="prinitScalaFunction" class="olegz.scala.spring.PrintFunction"/>
 	
-	<bean class="olegz.scala.spring.SimpleSpringBean">
+	<bean id="functionDirect" class="olegz.scala.spring.SimpleSpringBean">
 		<property name="function" ref="prinitScalaFunction"/>
 	</bean>
-
+	
+	
+	<bean id="prinitScalaFunctionFB" class="olegz.scala.spring.ScalaFactoryBean"/>
+	
+	<bean id="functionViaFactoryBean" class="olegz.scala.spring.SimpleSpringBean">
+		<property name="function" ref="prinitScalaFunctionFB"/>
+	</bean>
+	
 </beans>
