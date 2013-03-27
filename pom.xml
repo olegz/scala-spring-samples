@@ -5,6 +5,8 @@
 	<artifactId>scala-spring-samples</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
+        <sourceEncoding>UTF-8</sourceEncoding>
+        <scala.sdk.version>2.10.0</scala.sdk.version>
 		<spring.integration.version>2.0.4.RELEASE</spring.integration.version>
 		<log4j.version>1.2.16</log4j.version>
 		<junit.version>4.7</junit.version>
@@ -36,8 +38,8 @@
 	</dependencies>
 
 	<build>
-	<!--	<sourceDirectory>src/main/scala</sourceDirectory>
-		<testSourceDirectory>src/test/scala</testSourceDirectory> -->
+        <!--<sourceDirectory>src/main/scala</sourceDirectory>
+            <testSourceDirectory>src/test/scala</testSourceDirectory> -->
 		<plugins>
          <plugin>
              <groupId>net.alchim31.maven</groupId>
@@ -61,7 +63,7 @@
                  </execution>
              </executions>
              <configuration>
-                 <charset>${project.build.sourceEncoding}</charset>
+                 <charset>${sourceEncoding}</charset>
                  <scalaVersion>${scala.sdk.version}</scalaVersion>
                  <args>
                      <arg>-deprecation</arg>
