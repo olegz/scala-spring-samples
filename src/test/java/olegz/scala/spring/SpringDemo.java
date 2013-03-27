@@ -28,7 +28,7 @@ public class SpringDemo {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("scala-config.xml", SpringDemo.class);
+		ApplicationContext context = new ClassPathXmlApplicationContext("/scala-config.xml", SpringDemo.class);
 		SimpleSpringBean functionDirect = context.getBean("functionDirect", SimpleSpringBean.class);
 		functionDirect.printMessage("Hello Spring-Scala");
 		

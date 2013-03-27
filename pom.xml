@@ -5,6 +5,8 @@
 	<artifactId>scala-spring-samples</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
+        <sourceEncoding>UTF-8</sourceEncoding>
+        <scala.sdk.version>2.10.0</scala.sdk.version>
 		<spring.integration.version>2.0.4.RELEASE</spring.integration.version>
 		<log4j.version>1.2.16</log4j.version>
 		<junit.version>4.7</junit.version>
@@ -15,16 +17,13 @@
 			<artifactId>spring-integration-core</artifactId>
 			<version>${spring.integration.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>2.9.0-1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.scalaz</groupId>
-			<artifactId>scalaz-core_2.9.0-SNAPSHOT</artifactId>
-			<version>6.0-SNAPSHOT</version>
-		</dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -37,68 +36,49 @@
 			<version>${junit.version}</version>
 		</dependency>
 	</dependencies>
+
 	<build>
-		<sourceDirectory>src/main/scala</sourceDirectory>
-		<testSourceDirectory>src/test/scala</testSourceDirectory>
-
+        <!--<sourceDirectory>src/main/scala</sourceDirectory>
+            <testSourceDirectory>src/test/scala</testSourceDirectory> -->
 		<plugins>
-			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<scalaVersion>${scala.version}</scalaVersion>
-					<displayCmd>true</displayCmd>
-					<args>
-						<arg>-target:jvm-1.5</arg>
-					</args>
-					<jvmArgs>
-						<jvmArg>-Xmx1024m</jvmArg>
-					</jvmArgs>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-					<compilerArgument>-Xlint:all</compilerArgument>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>false</showDeprecation>
-				</configuration>
-			</plugin>
+         <plugin>
+             <groupId>net.alchim31.maven</groupId>
+             <artifactId>scala-maven-plugin</artifactId>
+             <version>3.1.3</version>
+              <executions>
+                 <execution>
+                     <id>scala-compile-first</id>
+                     <phase>process-resources</phase>
+                     <goals>
+                         <goal>add-source</goal>
+                         <goal>compile</goal>
+                     </goals>
+                 </execution>
+                 <execution>
+                     <id>scala-test-compile</id>
+                     <phase>process-test-resources</phase>
+                     <goals>
+                         <goal>testCompile</goal>
+                     </goals>
+                 </execution>
+             </executions>
+             <configuration>
+                 <charset>${sourceEncoding}</charset>
+                 <scalaVersion>${scala.sdk.version}</scalaVersion>
+                 <args>
+                     <arg>-deprecation</arg>
+                     <!-- <arg>-target:jvm-1.5</arg>-->
+                     <!--<arg>-make:transitivenocp</arg>-->
+                     <arg>-dependencyfile</arg>
+                     <arg>${project.build.directory}/.scala_dependencies</arg>
+                 </args>
+                 <jvmArgs>
+                     <jvmArg>-Xms64m</jvmArg>
+                     <jvmArg>-Xmx1024m</jvmArg>
+                     <jvmArg>-Xss16m</jvmArg>
+                 </jvmArgs>
+             </configuration>
+         </plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>repository.springframework.maven.release</id>
-			<name>Spring Framework Maven Release Repository</name>
-			<url>http://maven.springframework.org/release</url>
-		</repository>
-		<repository>
-			<id>repository.springframework.maven.milestone</id>
-			<name>Spring Framework Maven Milestone Repository</name>
-			<url>http://maven.springframework.org/milestone</url>
-		</repository>
-		<repository>
-			<id>repository.springframework.maven.snapshot</id>
-			<name>Spring Framework Maven Snapshot Repository</name>
-			<url>http://maven.springframework.org/snapshot</url>
-		</repository>
-		<repository>
-			<id>nexus.public</id>
-			<name>Nexus Public Repository</name>
-			<url>http://nexus.scala-tools.org/content/groups/public/</url>
-		</repository>
-		
-	</repositories>
 </project>
